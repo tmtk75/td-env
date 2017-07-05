@@ -1,0 +1,25 @@
+timezone: Asia/Tokyo
+
+# https://docs.digdag.io/scheduling_workflow.html
+schedule:
+  #daily>: 17:00:00
+  #cron>: 42 4 1 * *
+  minutes_interval>: 1
+
+_export:
+  docker:
+    image: centos:7
+
++step1:
+  py>: tasks.MyWorkflow.step1
+  param1: this is param1
+
++step2:
+  py>: tasks.MyWorkflow.step2
+
++extract:
+  sh>: curl -s https://www.mizuhobank.co.jp/rate/market/csv/quote.csv -o exchange.csv
+
++transform:
+  sh>: sed -e '1,2d' exchange.csv > quote.csv
+

@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  #web:
+  #  build: .
+  #  ports:
+  #    - "5000:5000"
+  #  volumes:
+  #    - .:/code
+  #    - logvolume01:/var/log
+  #  links:
+  #    - redis
+
+  #redis:
+  #  image: redis
+  mysql:
+    container_name: mysqld
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: foo
+      MYSQL_PASSWORD: abc123
+      MYSQL_ROOT_PASSWORD: verysecret
+
+  postgres:
+    container_name: some-postgres
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: abc123
+
+volumes:
+  logvolume01: {}

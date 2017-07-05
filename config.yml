@@ -1,0 +1,69 @@
+in:
+  type: file
+  path_prefix: ./quote.csv
+  parser:
+    charset: UTF-8
+    newline: CRLF
+    type: csv
+    delimiter: ','
+    quote: '"'
+    escape: '"'
+    null_string: '*****'
+    trim_if_not_quoted: false
+    skip_header_lines: 1
+    allow_extra_columns: false
+    allow_optional_columns: false
+    columns:
+    - {name: 'date', type: timestamp, format: '%Y/%m/%d'}
+    - {name: USD, type: double}
+    - {name: GBP, type: double}
+    - {name: EUR, type: double}
+    - {name: CAD, type: double}
+    - {name: CHF, type: double}
+    - {name: SEK, type: double}
+    - {name: DKK, type: double}
+    - {name: NOK, type: double}
+    - {name: AUD, type: double}
+    - {name: NZD, type: double}
+    - {name: ZAR, type: double}
+    - {name: BHD, type: double}
+    - {name: IDR(100), type: double}
+    - {name: CNY, type: double}
+    - {name: HKD, type: double}
+    - {name: INR, type: double}
+    - {name: MYR, type: double}
+    - {name: PHP, type: double}
+    - {name: SGD, type: double}
+    - {name: KRW(100), type: double}
+    - {name: THB, type: double}
+    - {name: KWD, type: double}
+    - {name: SAR, type: double}
+    - {name: AED, type: double}
+    - {name: MXN, type: double}
+    - {name: PGK, type: double}
+    - {name: HUF, type: double}
+    - {name: CZK, type: double}
+    - {name: PLN, type: double}
+    - {name: RUB, type: double}
+    - {name: TRY, type: double}
+    - {name: XXX, type: double}
+    - {name: IDR(100), type: double}
+    - {name: CNY, type: double}
+    - {name: MYR, type: double}
+    - {name: KRW(100), type: double}
+    - {name: TWD, type: double}
+filters:
+  - type: column
+    columns:
+      - {name: 'date'}
+      - {name: USD}
+      - {name: GBP}
+      - {name: EUR}
+out:
+  type: postgresql
+  host: 127.0.0.1
+  user: postgres
+  password: abc123
+  database: quote
+  table: exchange
+  mode: replace

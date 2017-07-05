@@ -1,0 +1,46 @@
+timezone: Asia/Tokyo
+
+_export:
+  foo: 112233
+  mysql:
+    !include : "./config/mysql.dig"
+  
++print_var:
+  echo>: "foo: ${foo}"
+ 
++print_var2:
+  _export:
+    foo: 445566
+  +print:
+    echo>: "foo: ${foo}"
+
++print_var3:
+   echo>: "mysql.host: ${mysql.host}"
+
++print_my_var:
+  _export:
+    my_var: "hello, world"
+  +sub:
+    py>: tasks.PrintMyVar.main
+
++print_mysql_var:
+  !include : "config/mysql.dig"
+  echo>: mysql -h ${host} -P ${port}
+ 
++builtin:
+  sh>: |
+    cat <<EOF
+    timezone:             ${timezone}
+    session_uuid:         ${session_uuid}
+    session_id:           ${session_id}
+    session_time:         ${session_time}
+    session_date:         ${session_date}
+    session_date_compact: ${session_date_compact}
+    session_local_time:   ${session_local_time}
+    session_tz_offset:    ${session_tz_offset}
+    session_unixtime:     ${session_unixtime}
+    task_name:            ${task_name}
+    EOF
+
++format_session_time:
+  echo>: ${moment(session_time).format("YYYY-MM-DD[T]HH:mm:ssZ")}

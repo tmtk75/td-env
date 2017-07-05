@@ -1,0 +1,10 @@
+schedule:
+  #cron>: */1 * * * *
+  minutes_interval>: 1
+
++main:
+  sh>: |
+    pwd
+    t=`date +%s`.txt
+    date > $t
+    cat $t

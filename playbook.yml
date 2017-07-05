@@ -1,0 +1,48 @@
+- hosts: localhost
+
+  connection: local
+
+  gather_facts: No
+
+  tasks:
+    - block:
+      - name: Mkdir digdag bin
+        file:
+          path: .digdag/bin
+          state: directory
+
+      - name: Download digdag
+        uri:
+          url: "https://dl.digdag.io/digdag-latest"
+          dest: .digdag/bin/digdag
+          creates: .digdag/bin/digdag
+
+      - name: Executable for digdag
+        file:
+          path: .digdag/bin/digdag
+          state: file
+          mode: "0755"
+
+      tags:
+        - digdag
+
+    - block:
+      - name: Mkdir embulk bin
+        file:
+          path: .embulk/bin
+          state: directory
+
+      - name: Download embulk
+        uri:
+          url: "https://dl.embulk.org/embulk-latest.jar" 
+          dest: .embulk/bin/embulk
+          creates: .embulk/bin/embulk
+
+      - name: Executable for embulk
+        file:
+          path: .embulk/bin/embulk
+          state: file
+          mode: "0755"
+
+      tags:
+        - embulk

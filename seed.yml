@@ -1,0 +1,5 @@
+in:
+  type: file
+  path_prefix: "./quote.csv"
+out:
+  type: stdout

@@ -1,0 +1,14 @@
++load:
+  sh>: embulk run -b bundle_dir config.yml
+
+_error:
+  #mail>: body.txt
+  mail>: {data: "Hello, this is from Digdag"}
+  subject: this workflow failed
+  to: [foobar@example.com]
+  from: root@example.net
+  host: smtp.gmail.com
+  port: 587
+  username: foobar
+  password: abc123
+
